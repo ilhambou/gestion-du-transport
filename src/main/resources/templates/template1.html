@@ -14,7 +14,7 @@
 <body>
 <div class="sidebar">
   <div class="logo-details">
-    <i class='bx bxl-c-plus-plus icon'></i>
+    <img src="logo.jpg" alt="profileImg">
     <div class="logo_name">Application</div>
     <i class='bx bx-menu' id="btn" ></i>
   </div>
@@ -36,51 +36,23 @@
     </li>
 
     <li>
-      <a href="#">
-        <i class='bx bx-chat' ></i>
-        <span class="links_name">Messages</span>
-      </a>
-      <span class="tooltip">Messages</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-pie-chart-alt-2' ></i>
-        <span class="links_name">Analytics</span>
-      </a>
-      <span class="tooltip">Analytics</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-folder' ></i>
-        <span class="links_name">File Manager</span>
-      </a>
-      <span class="tooltip">Files</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-cart-alt' ></i>
-        <span class="links_name">Order</span>
-      </a>
-      <span class="tooltip">Order</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='bx bx-heart' ></i>
-        <span class="links_name">Saved</span>
-      </a>
-      <span class="tooltip">Saved</span>
-    </li>
+
 
     <li class="profile">
       <div class="profile-details">
-        <img src="profile.jpg" alt="profileImg">
         <div class="name_job">
-          <div class="name">Prem Shahi</div>
-          <div class="job">Web designer</div>
+          <div class="name" th:text="${#authentication.name}"></div>
         </div>
       </div>
-      <i class='bx bx-log-out' id="log_out" ></i>
+      <form method="post" th:action="@{/logout}">
+        <button type="submit" class="logout-button logout">
+          <i class="bx bx-log-out"></i>
+        </button>
+
+      </form>
     </li>
+
+
   </ul>
 </div>
 
