@@ -39,17 +39,14 @@ public class EmployeeController {
         //return "test.Site1";
         return "employees";
     }
-    @GetMapping("/user/index")
-    public String index(){
 
-        return "index";
-    }
 
     @GetMapping("/admin/deleteEmployee")
     public String deleteEmployee(@RequestParam(name = "id") Long id, String keyword, int page){
         employeeRepository.deleteById(id);
         return "redirect:/admin/list?page="+page+"&keyword="+keyword;
     }
+
     @GetMapping("/admin/formEmployee")
     public String formEmployee(Model model ){
         model.addAttribute("employee",new Employee());
@@ -86,11 +83,6 @@ public class EmployeeController {
         model.addAttribute("employee",employee);
         return "editEmployee";
     }
-    @GetMapping("/index")
-    public String home(){
-        return "index";
-    }
-
 
 
 }

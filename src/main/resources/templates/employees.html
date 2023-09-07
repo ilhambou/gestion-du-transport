@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="template1.html"
->
+      layout:decorate="template1.html">
 <head>
   <meta charset="UTF-8">
   <title>Employees employees</title>
   <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css">
+  <!-- Ajouter la bibliothèque Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
 <div layout:fragment="content1">
-
-
   <div class="content mt-2">
     <div class="card">
       <div class="card-header">Liste des employees</div>
       <div class="card-body">
-        <form method="get" th:action="@{liste}">
+        <form method="get" th:action="@{list}">
           <label>Key word</label>
           <input type="text" name="keyword" th:value="${keyword}">
-          <button type="submit" class="btn btn-primary">chercher</button>
-
+          <!-- Bouton de recherche avec une icône -->
+          <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-search"></i></button>
+          <a class="btn btn-primary btn-icon" th:href="@{/admin/formEmployee}"><i class="fas fa-plus"></i></a>
         </form>
 
         <table class="table">
           <thead>
           <tr>
-            <th>ID</th><th>Nom</th><th>Date</th><th>Prenom</th><th>email</th><th>telephone</th><th>CIN</th><th>Sexe</th>
+            <th>ID</th><th>Nom</th><th>Date</th><th>Prenom</th><th>email</th><th>telephone</th><th>Sexe</th><th>CIN</th><th>Action</th>
           </tr>
           </thead>
           <tbody>
@@ -38,14 +38,17 @@
             <td th:text="${p.email}"></td>
             <td th:text="${p.tel}"></td>
             <td th:text="${p.sexe}"></td>
-            <td th:text="${p.CIN}">
+            <td th:text="${p.CIN}"></td>
             <td>
-              <a onclick="return confirm('etes vous sure ?')" class="btn btn-danger" th:href="@{delete(id=${p.id}, keyword=${keyword},page=${currentPage})}">Delete</a>
+              <!-- Bouton de suppression avec une icône -->
+              <a onclick="return confirm('etes vous sure ?')" class="btn btn-danger btn-icon" th:href="@{/admin/deleteEmployee(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                <i class="fas fa-trash"></i>
+              </a>
+              <!-- Bouton d'édition avec une icône -->
+              <a class="btn btn-success btn-icon" th:href="@{editEmployee(id=${p.id}, keyword=${keyword},page=${currentPage})}">
+                <i class="fas fa-edit"></i>
+              </a>
             </td>
-            <td>
-              <a class="btn btn-success" th:href="@{editEmployee(id=${p.id}, keyword=${keyword},page=${currentPage})}">Edit</a>
-            </td>
-
           </tr>
           </tbody>
         </table>
@@ -53,8 +56,9 @@
           <li th:each="page,status:${pages}">
             <a th:class="${status.index == currentPage?'btn btn-primary ms-1':'btn btn-ontline-primary ms-1'}"
                th:text = "${status.index}"
-               th:href="@{liste(page=${status.index},keyword=${keyword})}"
-            ></a>
+               th:href="@{liste(page=${status.index},keyword=${keyword})}">
+              <i class="fas fa-list"></i>
+            </a>
           </li>
         </ul>
       </div>
