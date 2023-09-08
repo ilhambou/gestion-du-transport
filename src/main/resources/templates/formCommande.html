@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1.html"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Commandes Commandes</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">
+
+  <div class="p-3">
+    <form method="POST" th:action="@{saveCommande}">
+      <div class="mb-3 mt-3">
+        <label for="nom" class="form-label">Nom:</label>
+        <input type="text" class="form-control" id="nom" placeholder="Nom" name="nom">
+        <span class="text-danger" th:errors="${Commande.nom}" th:value="${Commande.nom}"></span>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="nom" class="form-label">Poids:</label>
+        <input type="text" class="form-control" id="poids" placeholder="poids" name="poids">
+        <span class="text-danger" th:errors="${Commande.poids}" th:value="${Commande.poids}"></span>
+      </div>
+      <div class="mb-3">
+        <label for="client" class="form-label">client:</label>
+        <select class="form-control" id="client" name="client" th:value="${Commande.client}">
+          <option value="">Select Client</option>
+          <option th:each="client : ${listClient}" th:value="${client.id}" th:text="${client.nom}"></option>
+        </select>
+      </div>
+
+
+
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

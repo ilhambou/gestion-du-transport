@@ -28,17 +28,19 @@ public class SecurityConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.formLogin();
+        httpSecurity.formLogin().loginPage("/login") //.defaultSuccessUrl("/template1")
+         .permitAll();
+        httpSecurity.rememberMe();
+        httpSecurity.authorizeHttpRequests().requestMatchers("/webjars/**","/h2-console/**").permitAll();
 
         httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USR");
-//httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
         httpSecurity.authorizeHttpRequests()
                 .requestMatchers("/admin/**").hasRole("ADMIN");
-        httpSecurity.authorizeHttpRequests()
-                .requestMatchers("/index/**").hasAnyRole("ADMIN","USR");
+       // httpSecurity.authorizeHttpRequests().requestMatchers("/template1").authenticated();
+
+
 
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
-        //ila bghit ntconncta m3a chi ressource ma3endich lih le droit
+        httpSecurity.exceptionHandling().accessDeniedPage("/notAuthorized");
         return httpSecurity.build();
     }}
-

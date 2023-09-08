@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1.html"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Commandes Commandes</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">
+
+  <div class="p-3">
+    <form method="post" th:action="@{/admin/editCommande/{id}(id=${Commande.id})}">
+      <div class="mb-3 mt-3">
+        <label for="id" class="form-label" >ID:</label>
+        <label th:text="${Commande.id}" ></label>
+        <input type="hidden" class="form-control" id="id" placeholder="ID" name="id" th:value="${Commande.id}">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="nom" class="form-label">Nom:</label>
+        <input type="text" class="form-control" id="nom" placeholder="Nom" name="nom" th:value="${Commande.nom}">
+        <span class="text-danger" th:errors="${Commande.nom}"></span>
+      </div>
+
+      <div class="mb-3 mt-3">
+        <label for="poids" class="form-label">Poids:</label>
+        <input type="text" class="form-control" id="poids" placeholder="poids" name="poids" th:value="${Commande.poids}">
+        <span class="text-danger" th:errors="${Commande.poids}" th:value="${Commande.poids}"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
