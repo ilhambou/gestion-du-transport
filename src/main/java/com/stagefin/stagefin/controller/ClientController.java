@@ -1,7 +1,10 @@
 package com.stagefin.stagefin.controller;
 
+import com.stagefin.stagefin.entities.Categorie;
 import com.stagefin.stagefin.entities.Client;
+import com.stagefin.stagefin.entities.Commande;
 import com.stagefin.stagefin.repository.ClientRepository;
+import com.stagefin.stagefin.repository.CommandeRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,12 +17,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Controller
 public class ClientController {
     @Autowired
     private ClientRepository ClientRepository;
+
+
+
+
+    @GetMapping("/admin/showTotal/{id}")
+    public String showTotal(@PathVariable(name = "id") Long id, Model model) {
+        Client client = ClientRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Client introuvable"));
+
+
+
+
+        double totalBill = 0.0;
+        for (Commande commande : client.getCommande()) {
+            totalBill += commande.getCategorie().getPrix();
+        }
+
+        model.addAttribute("client", client);
+        model.addAttribute("totalBill", totalBill);
+
+        return "showTotal";
+    }
+
 
     @GetMapping("/admin/listclient")
     public String list(Model model,

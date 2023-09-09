@@ -262,7 +262,30 @@
     font-size: 24px;
     color: #fff;
     border: 2px solid #1d1b31; /* Ajoutez cette ligne pour définir la couleur du cadre */
+
+
 }
+
+/* ... (Your existing CSS code) ... */
+
+/* Add some margin-left to icons to move them slightly to the left */
+.sidebar i {
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+    margin-left: -18px; /* Adjust this value as needed */
+}
+
+/* Hide tooltips on screens with a max-width of 420px */
+@media (max-width: 420px) {
+    .sidebar li .tooltip {
+        display: none;
+    }
+}
+
 
 @media (max-width: 420px) {
     .sidebar li .tooltip{

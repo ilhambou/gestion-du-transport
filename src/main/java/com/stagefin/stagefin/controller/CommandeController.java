@@ -1,7 +1,9 @@
 package com.stagefin.stagefin.controller;
 
+import com.stagefin.stagefin.entities.Categorie;
 import com.stagefin.stagefin.entities.Client;
 import com.stagefin.stagefin.entities.Commande;
+import com.stagefin.stagefin.repository.CategorieRepository;
 import com.stagefin.stagefin.repository.ClientRepository;
 import com.stagefin.stagefin.repository.CommandeRepository;
 import jakarta.validation.Valid;
@@ -27,6 +29,8 @@ public class CommandeController {
     private CommandeRepository CommandeRepository;
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private CategorieRepository categorieRepository;
 
 
     @GetMapping("/admin/listCommande")
@@ -57,6 +61,10 @@ public class CommandeController {
         List<Client> client = clientRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
 
         model.addAttribute("listClient", client);
+        List<Categorie> categorie = categorieRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
+
+        model.addAttribute("listCategorie", categorie);
+
 
 
         return "formCommande";
@@ -76,6 +84,8 @@ public class CommandeController {
 
         Commande p = CommandeRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Commande introuvable"));
         p.setPoids(Commande.getPoids());
+        p.setCategorie(Commande.getCategorie());
+
         p.setClient(Commande.getClient());
 
 

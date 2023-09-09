@@ -40,6 +40,10 @@
                         <td th:text="${p.tel}"></td>
                         <td th:text="${p.sexe}"></td>
                         <td th:text="${p.CIN}"></td>
+
+
+
+
                         <td>
                             <!-- Bouton de suppression avec une icône -->
                             <a onclick="return confirm('etes vous sure ?')" class="btn btn-danger btn-icon" th:href="@{/admin/deleteClient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
@@ -48,6 +52,10 @@
                             <!-- Bouton d'édition avec une icône -->
                             <a class="btn btn-success btn-icon" th:href="@{editClient(id=${p.id}, keyword=${keyword},page=${currentPage})}">
                                 <i class="fas fa-edit"></i>
+                            </a>
+                            <a class="btn btn-info btn-icon"
+                               th:href="@{/admin/showTotal(id=${p.id})}">
+                                <i class="fas fa-dollar-sign"></i> Afficher le total
                             </a>
                         </td>
                     </tr>

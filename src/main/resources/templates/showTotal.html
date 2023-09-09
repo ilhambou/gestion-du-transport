@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1.html">
+<head>
+  <meta charset="UTF-8">
+  <title>Total à Payer</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
+  <!-- Ajouter la bibliothèque Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- Ajoutez vos styles CSS ou liens CDN ici -->
+</head>
+<body>
+<div layout:fragment="content1">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="container mb-5 mt-3">
+        <div class="row d-flex align-items-baseline">
+          <div class="col-xl-9">
+            <p style="color: #7e8d9f;font-size: 20px;"><strong>Facture</strong></p>
+          </div>
+          <div class="col-xl-3 float-end">
+            <a class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
+                    class="fas fa-print text-primary"></i> Print</a>
+
+          </div>
+          <hr>
+        </div>
+
+        <div class="container">
+
+
+          <div class="row">
+            <div class="col-xl-8">
+              <ul class="list-unstyled">
+                <li class="text-muted"><span style="color:#5d9fc5 ;" th:text="${client.nom + client.prenom}"></span></li>
+                <li class="text-muted" th:text="${client.email}"></li>
+                <li class="text-muted" th:text="${client.CIN}"></li>
+                <li class="text-muted"><i th:text="${client.tel}"></i> </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="row my-2 mx-1 justify-content-center">
+            <div class="content mt-2">
+              <div class="card">
+                <div class="card-header">Total à Payer pour <span th:text="${client.nom}"></span></div>
+                <div class="card-body">
+                  <p>Le total à payer pour <span th:text="${client.nom}"></span> est <span th:text="${totalBill}"></span> dh.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <hr>
+          <div class="row">
+            <div class="col-xl-10">
+              <p></p>
+            </div>
+            <div class="col-xl-2">
+              <button type="button" class="btn btn-primary text-capitalize"
+                      style="background-color:#60bdf3 ;" th:href="@{/admin/listclient}">return</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
