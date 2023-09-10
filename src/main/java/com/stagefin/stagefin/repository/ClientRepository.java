@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
     Page<Client> findByNomContains(String kw, Pageable pageable);
+    long countBySexe(String sexe);
+
 }
