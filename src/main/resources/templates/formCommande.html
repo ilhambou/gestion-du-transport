@@ -12,6 +12,8 @@
 <div layout:fragment="content1">
 
   <div class="p-3">
+    <div class="card"> <!-- Ajouter une carte Bootstrap autour du formulaire -->
+      <div class="card-body">
     <form method="POST" th:action="@{saveCommande}">
       <div class="mb-3 mt-3">
         <label for="nom" class="form-label">Nom:</label>
@@ -42,6 +44,8 @@
 
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
+  </div>
+</div>
   </div>
 </div>
 </body>

@@ -7,8 +7,13 @@ import com.stagefin.stagefin.repository.ClientRepository;
 import com.stagefin.stagefin.repository.CommandeRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -24,16 +30,33 @@ public class ClientController {
     @Autowired
     private ClientRepository ClientRepository;
 
+    @GetMapping("/admin/download/showTotal")
+    public ResponseEntity<Resource> downloadShowTotal() throws IOException {
+        // Load the "showTotal.html" file from the classpath
+        Resource resource = new ClassPathResource("templates/showTotal.html");
+
+        // Check if the resource exists
+        if (resource.exists()) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=showTotal.html");
+
+            // Set the content type to HTML
+            MediaType mediaType = MediaType.TEXT_HTML;
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentType(mediaType)
+                    .body(resource);
+        } else {
+            throw new NoSuchElementException("File not found");
+        }
+    }
 
 
 
     @GetMapping("/admin/showTotal/{id}")
     public String showTotal(@PathVariable(name = "id") Long id, Model model) {
         Client client = ClientRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Client introuvable"));
-
-
-
-
         double totalBill = 0.0;
         for (Commande commande : client.getCommande()) {
             totalBill += commande.getCategorie().getPrix();
@@ -44,6 +67,7 @@ public class ClientController {
 
         return "showTotal";
     }
+
 
 
     @GetMapping("/admin/listclient")
@@ -104,6 +128,8 @@ public class ClientController {
         model.addAttribute("Client",Client);
         return "editClient";
     }
+
+    
 
 
 }
