@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.util.*;
 
 
 @Entity
@@ -44,6 +44,14 @@ public class Employee {
     private String tel;
     @NotEmpty
     private String CIN;
+
+    @OneToMany(mappedBy = "employee", orphanRemoval = true,cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
+    private Collection<Voyage> Voyage = new ArrayList<>();
+
+
+
+
+
 
 
 }

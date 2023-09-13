@@ -33,6 +33,10 @@ public class Commande {
 
     private Categorie categorie;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "voyage_id")
+    private Voyage voyage;
+
     @Override
     public String toString() {
         return "Commande{" +

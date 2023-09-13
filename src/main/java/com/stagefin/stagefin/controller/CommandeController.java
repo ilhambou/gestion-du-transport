@@ -3,9 +3,11 @@ package com.stagefin.stagefin.controller;
 import com.stagefin.stagefin.entities.Categorie;
 import com.stagefin.stagefin.entities.Client;
 import com.stagefin.stagefin.entities.Commande;
+import com.stagefin.stagefin.entities.Voyage;
 import com.stagefin.stagefin.repository.CategorieRepository;
 import com.stagefin.stagefin.repository.ClientRepository;
 import com.stagefin.stagefin.repository.CommandeRepository;
+import com.stagefin.stagefin.repository.VoyageRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,6 +33,8 @@ public class CommandeController {
     private ClientRepository clientRepository;
     @Autowired
     private CategorieRepository categorieRepository;
+    @Autowired
+    private VoyageRepository voyageRepository;
 
 
     @GetMapping("/admin/listCommande")
@@ -58,12 +62,18 @@ public class CommandeController {
     @GetMapping("/admin/formCommande")
     public String formCommande(Model model ){
         model.addAttribute("Commande",new Commande());
+
         List<Client> client = clientRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
-
         model.addAttribute("listClient", client);
-        List<Categorie> categorie = categorieRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
 
+        List<Categorie> categorie = categorieRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
         model.addAttribute("listCategorie", categorie);
+
+        List<Voyage> voyage = voyageRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
+        model.addAttribute("listVoyage", voyage);
+
+
+
 
 
 
@@ -87,6 +97,7 @@ public class CommandeController {
         p.setCategorie(Commande.getCategorie());
 
         p.setClient(Commande.getClient());
+        p.setVoyage(Commande.getVoyage());
 
 
         CommandeRepository.save(p);

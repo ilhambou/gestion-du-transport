@@ -1,14 +1,13 @@
 package com.stagefin.stagefin.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -25,6 +24,9 @@ public class Vehicule {
     private String modele;
     private Date date_fabrication;
     private String carburant;
+
+    @OneToMany(mappedBy = "vehicule", orphanRemoval = true,cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
+    private Collection<Voyage> Voyage = new ArrayList<>();
 
 
 

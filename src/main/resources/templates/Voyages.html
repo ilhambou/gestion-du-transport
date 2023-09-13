@@ -4,7 +4,7 @@
       layout:decorate="template1.html">
 <head>
   <meta charset="UTF-8">
-  <title>Commandes Commandes</title>
+  <title>Voyages Voyages</title>
   <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
   <!-- Ajouter la bibliothèque Font Awesome -->
@@ -14,50 +14,56 @@
 <div layout:fragment="content1">
   <div class="content mt-2">
     <div class="card">
-      <div class="card-header">Liste des Commandes</div>
+      <div class="card-header">Liste des Voyages</div>
       <div class="card-body">
         <form method="get" th:action="@{list}">
           <label>Key word</label>
           <input type="text" name="keyword" th:value="${keyword}">
           <!-- Bouton de recherche avec une icône -->
           <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-search"></i></button>
-          <a class="btn btn-primary btn-icon" th:href="@{/admin/formCommande}"><i class="fas fa-plus"></i></a>
+          <a class="btn btn-primary btn-icon" th:href="@{/admin/formVoyage}"><i class="fas fa-plus"></i></a>
         </form>
 
         <table class="table">
           <thead>
           <tr>
-            <th>ID</th><th>poids</th><th>client</th><th>categorie</th><th>Action</th>
+            <th>ID</th><th>nom</th><th>employee</th><th>vehicule</th><th>commandes</th><th>Action</th>
           </tr>
           </thead>
           <tbody>
-          <tr th:each="p:${listCommandes}">
+          <tr th:each="p:${listVoyages}">
             <td th:text="${p.id}"></td>
-            <td th:text="${p.poids}"></td>
-            <td>
-              <ul>
-                <li th:each="client : ${p.client}" th:text="${client.nom}"></li>
-              </ul>
-            </td>
-            <td>
-              <ul>
-                <li th:each="categorie : ${p.categorie}" th:text="${categorie.nom}"></li>
-              </ul>
-            </td>
 
+            <td th:text="${p.nom}"></td>
+            <td>
+              <ul>
+                <li th:each="employee : ${p.employee}" th:text="${employee.nom}"></li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li th:each="vehicule : ${p.vehicule}" th:text="${vehicule.nom}"></li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li th:each="commande : ${p.commandes}" th:text="${commande.nom}"></li>
+              </ul>
+            </td>
 
 
 
             <td>
               <!-- Bouton de suppression avec une icône -->
-              <a onclick="return confirm('etes vous sure ?')" class="btn btn-danger btn-icon" th:href="@{/admin/deleteCommande(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+              <a onclick="return confirm('etes vous sure ?')" class="btn btn-danger btn-icon" th:href="@{/admin/deleteVoyage(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
                 <i class="fas fa-trash"></i>
               </a>
               <!-- Bouton d'édition avec une icône -->
-              <a class="btn btn-success btn-icon" th:href="@{editCommande(id=${p.id}, keyword=${keyword},page=${currentPage})}">
+              <a class="btn btn-success btn-icon" th:href="@{editVoyage(id=${p.id}, keyword=${keyword},page=${currentPage})}">
                 <i class="fas fa-edit"></i>
               </a>
             </td>
+
           </tr>
           </tbody>
         </table>
