@@ -30,8 +30,7 @@ public class Voyage {
 
     @NotNull
     private Date heure_arrive;
-    @NotEmpty
-    private String Destination;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vehicule_id")
@@ -44,6 +43,14 @@ public class Voyage {
     @JoinColumn(updatable = false)
 
     private Employee employee;
+
+    @Override
+    public String toString() {
+        return "Voyage{" +
+                "id=" + id +
+                // Other fields here
+                ", vehicule=" + (vehicule != null ? vehicule.getId() : "null") + // Avoid calling vehicule.toString() directly
+                '}';}
 
 
 }

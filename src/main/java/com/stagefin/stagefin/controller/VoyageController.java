@@ -93,7 +93,6 @@ public class VoyageController {
         p.setCommandes(Voyage.getCommandes());
         p.setHeure_depart(Voyage.getHeure_depart());
         p.setHeure_arrive(Voyage.getHeure_arrive());
-        p.setDestination(Voyage.getDestination());
 
 
         voyageRepository.save(p);
@@ -103,6 +102,14 @@ public class VoyageController {
     public String editVoyage(@RequestParam(name = "id") Long id, Model model){
         Voyage Voyage=voyageRepository.findById(id).get();
         model.addAttribute("Voyage",Voyage);
+        List<Employee> employee = employeeRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
+
+        model.addAttribute("listEmoloyee", employee);
+        List<Vehicule> vehicule = vehiculeRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
+
+        model.addAttribute("listVehicule", vehicule);
+
+
         return "editVoyage";
     }
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Voyages Voyages</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">
+
+    <div class="p-3">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" th:action="@{/admin/editVoyage/{id}(id=${Voyage.id})}">
+                    <div class="mb-3 mt-3">
+                        <label for="id" class="form-label">ID:</label>
+                        <label th:text="${Voyage.id}"></label>
+                        <input type="hidden" class="form-control" id="id" placeholder="ID" name="id" th:value="${Voyage.id}">
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="nom" class="form-label">Nom:</label>
+                        <input type="text" class="form-control" id="nom" placeholder="Nom" name="nom" th:value="${Voyage.nom}">
+                        <span class="text-danger" th:if="${#fields.hasErrors('Voyage.nom')}" th:errors="*{Voyage.nom}"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="vehicule" class="form-label">Véhicule:</label>
+                        <select class="form-control" id="vehicule" name="vehicule" th:value="${Voyage.vehicule}">
+                            <option value="">Sélectionnez un véhicule</option>
+                            <option th:each="vehicule: ${listVehicule}" th:value="${vehicule.id}" th:text="${vehicule.nom}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="employee" class="form-label">Employé:</label>
+                        <select class="form-control" id="employee" name="employee" th:value="${Voyage.employee}">
+                            <option value="">Sélectionnez un employé</option>
+                            <option th:each="employee : ${listEmoloyee}" th:value="${employee.id}" th:text="${employee.nom}"></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="heure_depart" class="form-label">Heure de départ:</label>
+                        <input type="datetime-local" class="form-control" id="heure_depart" placeholder="Heure de départ" name="heure_depart" th:value="${Voyage.heure_depart}">
+                        <span class="text-danger" th:if="${#fields.hasErrors('Voyage.heure_depart')}" th:errors="*{Voyage.heure_depart}"></span>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="heure_arrive" class="form-label">Heure d'arrivée:</label>
+                        <input type="datetime-local" class="form-control" id="heure_arrive" placeholder="Heure d'arrivée" name="heure_arrive" th:value="${Voyage.heure_arrive}">
+                        <span class="text-danger" th:if="${#fields.hasErrors('Voyage.heure_arrive')}" th:errors="*{Voyage.heure_arrive}"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

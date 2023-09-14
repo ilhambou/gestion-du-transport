@@ -27,6 +27,14 @@ public class Vehicule {
 
     @OneToMany(mappedBy = "vehicule", orphanRemoval = true,cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     private Collection<Voyage> Voyage = new ArrayList<>();
+    @Override
+    public String toString() {
+        return "Vehicule{" +
+                "id=" + id +
+                // Other fields here
+                '}';
+    }
+
 
 
 
