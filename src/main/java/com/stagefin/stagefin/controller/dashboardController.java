@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -64,6 +65,24 @@ public class dashboardController {
         }
 
         model.addAttribute("totalCommandePrice", totalCommandePrice);
+
+
+        Date currentDate = new Date();
+        long totalClientsOlderThan25 = ClientRepository.countClientsOlderThan25(currentDate);
+        long totalClientsYoungerThan25 = ClientRepository.countClientsYoungerThan25(currentDate);
+
+        long totalClientsInAgeGroups = totalClientsOlderThan25 + totalClientsYoungerThan25;
+
+        double olderThan25Percentage = (double) totalClientsOlderThan25 / totalClientsInAgeGroups * 100;
+        double youngerThan25Percentage = (double) totalClientsYoungerThan25 / totalClientsInAgeGroups * 100;
+
+        model.addAttribute("totalClientsOlderThan25", totalClientsOlderThan25);
+        model.addAttribute("totalClientsYoungerThan25", totalClientsYoungerThan25);
+        model.addAttribute("olderThan25Percentage", olderThan25Percentage);
+        model.addAttribute("youngerThan25Percentage", youngerThan25Percentage);
+
+
+
 
 
 
