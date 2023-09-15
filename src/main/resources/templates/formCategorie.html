@@ -16,12 +16,12 @@
       <div class="card-body">
     <form method="POST" th:action="@{saveCategorie}">
       <div class="mb-3 mt-3">
-        <label for="nom" class="form-label">Nom:</label>
+        <label for="nom" class="form-label">Nom de la ville:</label>
         <input type="text" class="form-control" id="nom" placeholder="Nom" name="nom">
         <span class="text-danger" th:errors="${Categorie.nom}" th:value="${Categorie.nom}"></span>
       </div>
       <div class="mb-3 mt-3">
-        <label for="prix" class="form-label">Nom:</label>
+        <label for="prix" class="form-label">Prix:</label>
         <input type="prix" class="form-control" id="prix" placeholder="prix" name="prix">
         <span class="text-danger" th:errors="${Categorie.prix}" th:value="${Categorie.prix}"></span>
       </div>

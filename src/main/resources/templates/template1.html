@@ -14,8 +14,7 @@
 <body>
 <div class="sidebar">
   <div class="logo-details">
-    <img src="logo.jpg" alt="profileImg">
-    <div class="logo_name">Application</div>
+    <div class="logo_name">Gestion transport</div>
     <i class='bx bx-menu' id="btn" ></i>
   </div>
   <ul class="nav-list">
@@ -51,23 +50,24 @@
     <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
       <a th:href="@{/admin/listCategorie}">
         <i class="bx bx-bookmark-plus"></i>
-        <span class="links_name">Categorie</span>
+        <span class="links_name">Destination</span>
       </a>
-      <span class="tooltip">Categorie</span>
+      <span class="tooltip">Destination</span>
     </li>
-    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-      <a th:href="@{/admin/listVehicule}">
-        <i class="fas fa-car-alt"></i>
-        <span class="links_name">Vehicule</span>
-      </a>
-      <span class="tooltip">Vehicule</span>
-    </li>
+
     <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
       <a th:href="@{/admin/listVoyage}">
-        <i class="fas fa-car-alt"></i>
+        <i class="bx bx-list-ul"></i>
         <span class="links_name">Voyage</span>
       </a>
       <span class="tooltip">Voyage</span>
+    </li>
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+      <a th:href="@{/admin/listVehicule}">
+        <i class="bx bx-bookmark-plus"></i>
+        <span class="links_name">Vehicule</span>
+      </a>
+      <span class="tooltip">Vehicule</span>
     </li>
 
     <li>
@@ -75,9 +75,9 @@
 
     <li class="profile">
       <div class="profile-details">
-        <div class="name_job">
+
           <div class="name" th:text="${#authentication.name}"></div>
-        </div>
+
       </div>
       <form method="post" th:action="@{/logout}">
         <button type="submit" class="logout-button logout">

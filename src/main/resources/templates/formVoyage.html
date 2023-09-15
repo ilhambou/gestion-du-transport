@@ -29,9 +29,9 @@
             </select>
           </div>
           <div class="mb-3">
-            <label for="employee" class="form-label">employee:</label>
+            <label for="employee" class="form-label">conducteur:</label>
             <select class="form-control" id="employee" name="employee" th:value="${Voyage.employee}">
-              <option value="">Select employee</option>
+              <option value="">Select conducteur</option>
               <option th:each="employee : ${listEmoloyee}" th:value="${employee.id}" th:text="${employee.nom}"></option>
             </select>
           </div>
