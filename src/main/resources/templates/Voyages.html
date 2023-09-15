@@ -71,7 +71,7 @@
           <li th:each="page,status:${pages}">
             <a th:class="${status.index == currentPage?'btn btn-primary ms-1':'btn btn-ontline-primary ms-1'}"
                th:text = "${status.index}"
-               th:href="@{liste(page=${status.index},keyword=${keyword})}">
+               th:href="@{listVoyage(page=${status.index},keyword=${keyword})}">
               <i class="fas fa-list"></i>
             </a>
           </li>

@@ -33,9 +33,8 @@ public class SecurityConfig {
         httpSecurity.rememberMe();
         httpSecurity.authorizeHttpRequests().requestMatchers("/webjars/**","/h2-console/**").permitAll();
 
-        httpSecurity.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USR");
-        httpSecurity.authorizeHttpRequests()
-                .requestMatchers("/admin/**").hasRole("ADMIN");
+        httpSecurity.authorizeHttpRequests().requestMatchers("/usr/**").hasRole("USR");
+        httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
        // httpSecurity.authorizeHttpRequests().requestMatchers("/template1").authenticated();
 
 

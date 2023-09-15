@@ -37,7 +37,7 @@ public class CommandeController {
     private VoyageRepository voyageRepository;
 
 
-    @GetMapping("/admin/listCommande")
+    @GetMapping("/usr/listCommande")
     public String list(Model model,
                        @RequestParam(name = "page",defaultValue = "0") int page,
                        @RequestParam(name = "size",defaultValue = "5") int size,
@@ -53,13 +53,13 @@ public class CommandeController {
     }
 
 
-    @GetMapping("/admin/deleteCommande")
+    @GetMapping("/usr/deleteCommande")
     public String deleteCommande(@RequestParam(name = "id") Long id, String keyword, int page){
         CommandeRepository.deleteById(id);
-        return "redirect:/admin/listCommande?page="+page+"&keyword="+keyword;
+        return "redirect:/usr/listCommande?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping("/admin/formCommande")
+    @GetMapping("/usr/formCommande")
     public String formCommande(Model model ){
         model.addAttribute("Commande",new Commande());
 
@@ -79,14 +79,14 @@ public class CommandeController {
 
         return "formCommande";
     }
-    @PostMapping("/admin/saveCommande")
+    @PostMapping("/usr/saveCommande")
     public String saveCommande(@Valid Commande Commande, BindingResult bindingResult){
         if (bindingResult.hasErrors()) return "formCommande";
         CommandeRepository.save(Commande);
-        return "redirect:/admin/listCommande";
+        return "redirect:/usr/listCommande";
     }
 
-    @PostMapping("/admin/editCommande/{id}")
+    @PostMapping("/usr/editCommande/{id}")
     public String editCommande(@Valid Commande Commande, BindingResult bindingResult, @PathVariable Long id){
         if (bindingResult.hasErrors()) {
             return "editCommande";
@@ -101,9 +101,9 @@ public class CommandeController {
 
 
         CommandeRepository.save(p);
-        return "redirect:/admin/listCommande";
+        return "redirect:/usr/listCommande";
     }
-    @GetMapping("/admin/editCommande")
+    @GetMapping("/usr/editCommande")
     public String editCommande(@RequestParam(name = "id") Long id, Model model){
         Commande Commande=CommandeRepository.findById(id).get();
         model.addAttribute("Commande",Commande);

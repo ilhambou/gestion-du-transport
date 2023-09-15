@@ -21,7 +21,7 @@
                     <input type="text" name="keyword" th:value="${keyword}">
                     <!-- Bouton de recherche avec une icône -->
                     <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-search"></i></button>
-                    <a class="btn btn-primary btn-icon" th:href="@{/admin/formClient}"><i class="fas fa-plus"></i></a>
+                    <a class="btn btn-primary btn-icon" th:href="@{/usr/formClient}"><i class="fas fa-plus"></i></a>
                 </form>
 
                 <table class="table">
@@ -43,7 +43,7 @@
 
                         <td>
                             <!-- Bouton de suppression avec une icône -->
-                            <a onclick="return confirm('etes vous sure ?')" class="btn btn-danger btn-icon" th:href="@{/admin/deleteClient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                            <a onclick="return confirm('etes vous sure ?')" class="btn btn-danger btn-icon" th:href="@{/usr/deleteClient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
                                 <i class="fas fa-trash"></i>
                             </a>
                             <!-- Bouton d'édition avec une icône -->
@@ -51,7 +51,7 @@
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a class="btn btn-info btn-icon"
-                               th:href="@{'/admin/showTotal/' + ${p.id}}">
+                               th:href="@{'/usr/showTotal/' + ${p.id}}">
                                 <i class="fas fa-dollar-sign"></i> Afficher la facture
                             </a>
                         </td>
@@ -62,7 +62,7 @@
                     <li th:each="page,status:${pages}">
                         <a th:class="${status.index == currentPage?'btn btn-primary ms-1':'btn btn-ontline-primary ms-1'}"
                            th:text = "${status.index}"
-                           th:href="@{liste(page=${status.index},keyword=${keyword})}">
+                           th:href="@{list(page=${status.index},keyword=${keyword})}">
                             <i class="fas fa-list"></i>
                         </a>
                     </li>

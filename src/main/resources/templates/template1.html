@@ -20,49 +20,49 @@
   </div>
   <ul class="nav-list">
 
-    <li>
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
       <a th:href="@{/admin/dashboard}">
         <i class='bx bx-grid-alt'></i>
         <span class="links_name">Dashboard</span>
       </a>
       <span class="tooltip">Dashboard</span>
     </li>
-    <li>
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
       <a th:href="@{/admin/list}">
         <i class='bx bx-user'></i>
-        <span class="links_name">User</span>
+        <span class="links_name">Conducteur</span>
       </a>
-      <span class="tooltip">User</span>
+      <span class="tooltip">Conducteur</span>
     </li>
-    <li>
-      <a th:href="@{/admin/listclient}">
+    <li th:if="${#authorization.expression('hasRole(''USR'')')}">
+      <a th:href="@{/usr/listclient}" >
         <i class='bx bx-user'></i>
         <span class="links_name">client</span>
       </a>
       <span class="tooltip">client</span>
     </li>
-    <li>
-      <a th:href="@{/admin/listCommande}">
+    <li th:if="${#authorization.expression('hasRole(''USR'')')}">
+      <a th:href="@{/usr/listCommande}">
         <i class="bx bx-list-ul"></i>
-        <span class="links_name">Commande</span>
+        <span class="links_name">Colis</span>
       </a>
-      <span class="tooltip">commande</span>
+      <span class="tooltip">colis</span>
     </li>
-    <li>
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
       <a th:href="@{/admin/listCategorie}">
         <i class="bx bx-bookmark-plus"></i>
         <span class="links_name">Categorie</span>
       </a>
       <span class="tooltip">Categorie</span>
     </li>
-    <li>
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
       <a th:href="@{/admin/listVehicule}">
         <i class="fas fa-car-alt"></i>
         <span class="links_name">Vehicule</span>
       </a>
       <span class="tooltip">Vehicule</span>
     </li>
-    <li>
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
       <a th:href="@{/admin/listVoyage}">
         <i class="fas fa-car-alt"></i>
         <span class="links_name">Voyage</span>

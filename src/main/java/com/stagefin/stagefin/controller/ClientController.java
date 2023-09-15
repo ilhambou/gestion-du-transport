@@ -30,7 +30,7 @@ public class ClientController {
     @Autowired
     private ClientRepository ClientRepository;
 
-    @GetMapping("/admin/download/showTotal")
+    @GetMapping("/usr/download/showTotal")
     public ResponseEntity<Resource> downloadShowTotal() throws IOException {
         // Load the "showTotal.html" file from the classpath
         Resource resource = new ClassPathResource("templates/showTotal.html");
@@ -54,7 +54,7 @@ public class ClientController {
 
 
 
-    @GetMapping("/admin/showTotal/{id}")
+    @GetMapping("/usr/showTotal/{id}")
     public String showTotal(@PathVariable(name = "id") Long id, Model model) {
         Client client = ClientRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Client introuvable"));
         double totalBill = 0.0;
@@ -70,7 +70,7 @@ public class ClientController {
 
 
 
-    @GetMapping("/admin/listclient")
+    @GetMapping("/usr/listclient")
     public String list(Model model,
                        @RequestParam(name = "page",defaultValue = "0") int page,
                        @RequestParam(name = "size",defaultValue = "5") int size,
@@ -86,25 +86,25 @@ public class ClientController {
     }
 
 
-    @GetMapping("/admin/deleteClient")
+    @GetMapping("/usr/deleteClient")
     public String deleteClient(@RequestParam(name = "id") Long id, String keyword, int page){
         ClientRepository.deleteById(id);
-        return "redirect:/admin/listclient?page="+page+"&keyword="+keyword;
+        return "redirect:/usr/listclient?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping("/admin/formClient")
+    @GetMapping("/usr/formClient")
     public String formClient(Model model ){
         model.addAttribute("Client",new Client());
         return "formClient";
     }
-    @PostMapping("/admin/saveClient")
+    @PostMapping("/usr/saveClient")
     public String saveClient(@Valid Client Client, BindingResult bindingResult){
         if (bindingResult.hasErrors()) return "formClient";
         ClientRepository.save(Client);
-        return "redirect:/admin/listclient";
+        return "redirect:/usr/listclient";
     }
 
-    @PostMapping("/admin/editClient/{id}")
+    @PostMapping("/usr/editClient/{id}")
     public String editClient(@Valid Client Client, BindingResult bindingResult, @PathVariable Long id){
         if (bindingResult.hasErrors()) {
             return "editClient";
@@ -120,9 +120,9 @@ public class ClientController {
         p.setSexe(Client.getSexe());
 
         ClientRepository.save(p);
-        return "redirect:/admin/listclient";
+        return "redirect:/usr/listclient";
     }
-    @GetMapping("/admin/editClient")
+    @GetMapping("/usr/editClient")
     public String editClient(@RequestParam(name = "id") Long id, Model model){
         Client Client=ClientRepository.findById(id).get();
         model.addAttribute("Client",Client);

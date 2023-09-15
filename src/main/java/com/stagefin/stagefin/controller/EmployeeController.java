@@ -25,6 +25,7 @@ public class EmployeeController {
     public String sidebar() {
         return "template1";
     }
+
     @GetMapping("/admin/list")
     public String list(Model model,
                        @RequestParam(name = "page",defaultValue = "0") int page,
