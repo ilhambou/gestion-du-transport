@@ -44,6 +44,11 @@ public class Voyage {
 
     private Employee employee;
 
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(updatable = false)
+
+    private Categorie categorie;
+
     @Override
     public String toString() {
         return "Voyage{" +

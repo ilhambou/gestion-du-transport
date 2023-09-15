@@ -27,13 +27,6 @@
       </div>
 
       <div class="mb-3">
-        <label for="categorie" class="form-label">categorie:</label>
-        <select class="form-control" id="categorie" name="categorie" th:value="${Commande.categorie}">
-          <option value="">Select une categorie</option>
-          <option th:each="categorie: ${listCategorie}" th:value="${categorie.id}" th:text="${categorie.nom}"></option>
-        </select>
-      </div>
-      <div class="mb-3">
         <label for="client" class="form-label">client:</label>
         <select class="form-control" id="client" name="client" th:value="${Commande.client}">
           <option value="">Select Client</option>

@@ -3,6 +3,7 @@ package com.stagefin.stagefin.controller;
 import com.stagefin.stagefin.entities.Categorie;
 import com.stagefin.stagefin.entities.Client;
 import com.stagefin.stagefin.entities.Commande;
+import com.stagefin.stagefin.entities.Voyage;
 import com.stagefin.stagefin.repository.ClientRepository;
 import com.stagefin.stagefin.repository.CommandeRepository;
 import jakarta.validation.Valid;
@@ -54,12 +55,38 @@ public class ClientController {
 
 
 
+  /*  @GetMapping("/usr/showTotal/{id}")
+    public String showTotal(@PathVariable(name = "id") Long id, Model model) {
+        Client client = ClientRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Client introuvable"));
+        double totalBill = 0.0;
+        for (Commande commande : client.getCommande()) {
+            totalBill += commande.getVoyage().getCategorie().getPrix();
+        }
+
+        model.addAttribute("client", client);
+        model.addAttribute("totalBill", totalBill);
+
+        return "showTotal";
+    }*/
+
     @GetMapping("/usr/showTotal/{id}")
     public String showTotal(@PathVariable(name = "id") Long id, Model model) {
         Client client = ClientRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Client introuvable"));
         double totalBill = 0.0;
         for (Commande commande : client.getCommande()) {
-            totalBill += commande.getCategorie().getPrix();
+            Voyage voyage = commande.getVoyage();
+            if (voyage != null) {
+                Categorie categorie = voyage.getCategorie();
+                if (categorie != null) {
+                    totalBill += categorie.getPrix();
+                } else {
+                    // Log here to check if categorie is null
+                    System.out.println("Categorie is null for voyage: " + voyage.getId());
+                }
+            } else {
+                // Log here to check if voyage is null
+                System.out.println("Voyage is null for commande: " + commande.getId());
+            }
         }
 
         model.addAttribute("client", client);
@@ -67,6 +94,8 @@ public class ClientController {
 
         return "showTotal";
     }
+
+
 
 
 

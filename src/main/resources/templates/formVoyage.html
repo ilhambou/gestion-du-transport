@@ -35,6 +35,13 @@
               <option th:each="employee : ${listEmoloyee}" th:value="${employee.id}" th:text="${employee.nom}"></option>
             </select>
           </div>
+          <div class="mb-3">
+            <label for="categorie" class="form-label">Ville:</label>
+            <select class="form-control" id="categorie" name="categorie" th:value="${Voyage.categorie}">
+              <option value="">Select une ville</option>
+              <option th:each="categorie : ${listCategorie}" th:value="${categorie.id}" th:text="${categorie.nom}"></option>
+            </select>
+          </div>
 
           <div class="mb-3 mt-3">
             <label for="heure_depart" class="form-label">heure depart:</label>

@@ -94,7 +94,6 @@ public class CommandeController {
 
         Commande p = CommandeRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Commande introuvable"));
         p.setPoids(Commande.getPoids());
-        p.setCategorie(Commande.getCategorie());
 
         p.setClient(Commande.getClient());
         p.setVoyage(Commande.getVoyage());

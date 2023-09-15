@@ -30,6 +30,8 @@ public class VoyageController {
     private EmployeeRepository employeeRepository;
     @Autowired
     private VoyageRepository voyageRepository;
+    @Autowired
+    private CategorieRepository categorieRepository;
 
 
     @GetMapping("/admin/listVoyage")
@@ -67,6 +69,9 @@ public class VoyageController {
         model.addAttribute("listvoyage",new Voyage());
         List<Voyage> voyage = voyageRepository.findAll();
 
+        List<Categorie> categorie = categorieRepository.findAll(); // Replace 'patientRepository' with the actual repository for the Patient entity
+        model.addAttribute("listCategorie", categorie);
+
 
 
 
@@ -93,6 +98,7 @@ public class VoyageController {
         p.setCommandes(Voyage.getCommandes());
         p.setHeure_depart(Voyage.getHeure_depart());
         p.setHeure_arrive(Voyage.getHeure_arrive());
+        p.setCategorie(Voyage.getCategorie());
 
 
         voyageRepository.save(p);

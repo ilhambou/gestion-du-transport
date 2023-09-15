@@ -51,6 +51,8 @@ public class Client {
     @OneToMany(mappedBy = "client", orphanRemoval = true,cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     private Collection<Commande> Commande = new ArrayList<>();
 
+
+
     @Override
     public String toString() {
         return "Client{" +

@@ -1,10 +1,13 @@
 package com.stagefin.stagefin.controller;
 
+import com.stagefin.stagefin.entities.Categorie;
 import com.stagefin.stagefin.entities.Client;
 import com.stagefin.stagefin.entities.Commande;
+import com.stagefin.stagefin.entities.Voyage;
 import com.stagefin.stagefin.repository.ClientRepository;
 import com.stagefin.stagefin.repository.CommandeRepository;
 import com.stagefin.stagefin.repository.EmployeeRepository;
+import com.stagefin.stagefin.repository.VoyageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -26,6 +30,8 @@ public class dashboardController {
     EmployeeRepository employeeRepository;
     @Autowired
     CommandeRepository commandeRepository;
+    @Autowired
+    VoyageRepository voyageRepository;
 
 
     @GetMapping("/admin/dashboard")
@@ -59,12 +65,19 @@ public class dashboardController {
 
         List<Commande> commandes = commandeRepository.findAll();
 
-        double totalCommandePrice = 0.0;
+       double totalCommandePrice = 0.0;
         for (Commande commande : commandes) {
-            totalCommandePrice += commande.getCategorie().getPrix();
+           totalCommandePrice += commande.getVoyage().getCategorie().getPrix();
+
+
         }
 
         model.addAttribute("totalCommandePrice", totalCommandePrice);
+
+
+
+
+
 
 
         Date currentDate = new Date();
@@ -90,6 +103,8 @@ public class dashboardController {
 
         return "dashboard";
     }
+
+
 
 
 }

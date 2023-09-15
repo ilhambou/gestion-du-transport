@@ -19,6 +19,9 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Query("SELECT COUNT(c) FROM Client c WHERE YEAR(:currentDate) - YEAR(c.dateNaissance) < 25")
     long countClientsYoungerThan25(@Param("currentDate") Date currentDate);
+
+
+
 }
 
 

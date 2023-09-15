@@ -28,10 +28,6 @@ public class Commande {
 
     private Client client;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(updatable = false)
-
-    private Categorie categorie;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "voyage_id")

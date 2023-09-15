@@ -27,7 +27,7 @@
         <table class="table">
           <thead>
           <tr>
-            <th>ID</th><th>poids</th><th>client</th><th>categorie</th><th>Action</th>
+            <th>ID</th><th>poids</th><th>client</th><th>Trajet</th><th>Action</th>
           </tr>
           </thead>
           <tbody>
@@ -41,7 +41,7 @@
             </td>
             <td>
               <ul>
-                <li th:each="categorie : ${p.categorie}" th:text="${categorie.nom}"></li>
+                <li th:each="voyage : ${p.voyage}" th:text="${voyage.nom}"></li>
               </ul>
             </td>
 

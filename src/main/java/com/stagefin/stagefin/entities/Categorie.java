@@ -19,7 +19,9 @@ public class Categorie {
     private double prix;
 
     @OneToMany(mappedBy = "categorie", orphanRemoval = true,cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
-    private Collection<Commande> Commande = new ArrayList<>();
+    private Collection<Voyage> voyage = new ArrayList<>();
+
+
 
     @Override
     public String toString() {
